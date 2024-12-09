@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Login and Signup Form</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #fff;
+            color: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 400px;
+            max-width: 100%;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            background: #f3f3f3;
+            padding: 10px 0;
+        }
+
+        .tab {
+            cursor: pointer;
+            padding: 10px;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .tab.active {
+            color: #2575fc;
+            border-bottom: 2px solid #2575fc;
+        }
+
+        form {
+            padding: 20px;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        form.active {
+            display: block;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #2575fc;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: #1b5bb5;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" onclick="showForm('loginForm')">Login</div>
+            <div class="tab" onclick="showForm('signupForm')">Signup</div>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="active" action="https://formspree.io/f/mgvebkqg" method="POST">
+            <label>
+                Your Email:
+                <input type="email" name="email" required>
+            </label>
+            <label>
+                Password:
+                <input type="password" name="password" required>
+            </label>
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Signup Form -->
+        <form id="signupForm" action="https://formspree.io/f/mgvebkqg" method="POST">
+            <label>
+                Full Name:
+                <input type="text" name="name" required>
+            </label>
+            <label>
+                Your Email:
+                <input type="email" name="email" required>
+            </label>
+            <label>
+                Password:
+                <input type="password" name="password" required>
+            </label>
+            <label>
+                Message (Optional):
+                <textarea name="message"></textarea>
+            </label>
+            <button type="submit">Signup</button>
+        </form>
+    </div>
+
+    <script>
+        function showForm(formId) {
+            // Hide all forms
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => form.classList.remove('active'));
+
+            // Remove active class from tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show the selected form
+            document.getElementById(formId).classList.add('active');
+
+            // Highlight the active tab
+            const activeTab = formId === 'loginForm' ? tabs[0] : tabs[1];
+            activeTab.classList.add('active');
+        }
+    </script>
+</body>
+</html>
